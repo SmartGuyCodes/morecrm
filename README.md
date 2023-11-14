@@ -1,6 +1,6 @@
 # Development
 
-![MoreCRM Status](https://github.com/SmartGuyCodes/morecrm/actions/workflows/hotelpos.yaml/badge.svg)
+![MoreCRM Status](https://github.com/SmartGuyCodes/morecrm/actions/workflows/morecrm.yaml/badge.svg)
 
 ## MoreCRM
 
