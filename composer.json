@@ -1,7 +1,7 @@
 {
-    "name": "smartguycodes/qr-stock-controller",
+    "name": "smartguycodes/morecrm",
     "type": "project",
-    "description": "The Stock Inventory Control Framework.",
+    "description": "The MoreCRM Framework.",
     "keywords": ["ecommerce", "laravel", "smartguycodes"],
     "license": "MIT",
     "require": {
