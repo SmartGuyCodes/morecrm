@@ -113,14 +113,17 @@ class StaffController extends Controller
         return  redirect()->back()->with('success', 'Staff record updated');
     }
 
-    public function sms_staff($phone)
+    public function sms_staff(Request $request, $phone)
     {
-        // dd($id);
+        // dd($request);
         //dd($category_id);
-        $msg = "Hello there ";
+        // $msg = "Hello there ";
+        $request->validate([
+            'message' => 'required'
+        ]);
         // $sms_sender = $this->send_sms($phone, $msg);
         // $sms_sender = $this->send_sms_demo($phone, $msg);
-        $sms_sender = $this->more_sms_sender($phone, $msg);
+        $sms_sender = $this->more_sms_sender($phone, $request->message);
         // dd($sms_sender);
         if($sms_sender != 'success'){
             return  redirect()->back()->with('error', 'Staff sms sender failed');// redirect('/login')->with('success', 'Your password has been changed!');
@@ -128,8 +131,17 @@ class StaffController extends Controller
 
         return  redirect()->back()->with('success', 'Staff sms sent');
     }
-    public function email_staff($email)
+    public function email_staff(Request $request, $email)
     {
+        dd($request);
+        //dd($category_id);
+        // $msg = "Hello there ";
+        $request->validate([
+            'message' => 'required'
+        ]);
+
+        // $code = $created_client_records['otp_code'];
+        // $mailer = (new EmailController())->verificationEmail($request->company_email, $created_client_records);
         if(Mail::to($email)->send(new StaffEmail()))
         {
             return  redirect()->back()->with('error', 'Staff emailed');

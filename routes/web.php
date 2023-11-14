@@ -128,8 +128,8 @@ Route::get('/staff', [StaffController::class, 'index']);
 Route::post('/add-staff', [StaffController::class, 'add_staff']);
 Route::post('/update-staff/{staff_id}', [StaffController::class, 'update_staff']);
 Route::get('/delete-staff/{staff_id}', [StaffController::class, 'delete_staff']);
-Route::get('/send-sms/{phone}', [StaffController::class, 'sms_staff']);
-Route::get('/send-email/{email}', [StaffController::class, 'email_staff']);
+Route::post('/send-sms/{phone}', [StaffController::class, 'sms_staff']);
+Route::post('/send-email/{email}', [StaffController::class, 'email_staff']);
 
 // ADMIN
 Route::get('/admin-dashboard', function(){

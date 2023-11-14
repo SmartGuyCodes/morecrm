@@ -66,7 +66,7 @@
                                 @endif
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-6 col-sm-12">
+                                        <div class="col-lg-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="company_name">Name<span style="color: #ff0000">*</span></label>
                                                 <input type="text" class="form-control" id="company_name" name="name" placeholder="" required>
@@ -89,7 +89,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                 </div>
                                 <!-- /.card-body -->
 
@@ -120,6 +119,7 @@
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Time Added</th>
+                                        <th>Send</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -132,9 +132,129 @@
                                             <td>{{$s->phone}}</td>
                                             <td><span class="direct-chat-timestamp">{{$s->created_at}}</span></td>
                                             <td>
+                                                {{-- <a href="/send-sms/{{ $s->phone }}" class="btn btn-warning"><i class="fas fa-envelope"></i></a> --}}
+                                                <!-- Button trigger modal -->
+                                                {{-- edit_supplier_{{$s->id}}_modal --}}
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sms_{{$s->id}}_Modal">
+                                                    SMS
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="sms_{{$s->id}}_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Compose SMS</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- form start -->
+                                                            <form action="/send-sms/{{$s->phone}}" method="POST">
+                                                                @csrf
+                                                                @if ($errors->any())
+                                                                    <div class="alert alert-danger text-[#ff0000]">
+                                                                        <ul>
+                                                                            @foreach ($errors->all() as $error)
+                                                                                <li>{{ $error }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </div>
+                                                                @endif
+                                                                <div class="card-body">
+                                                                    <div class="row">
+
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="company_email">Phone no.<span style="color: #ff0000">*</span></label>
+                                                                                <input type="telephone" class="form-control" id="phone" name="phone" value="{{$s->phone}}" readonly>
+                                                                                {{-- <textarea class="form-control" id="message" name="message" rows="6"></textarea> --}}
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="company_email">SMS Content<span style="color: #ff0000">*</span></label>
+                                                                                {{-- <input type="email" class="form-control" id="company_email" name="email" value="{{$s->email}}"> --}}
+                                                                                <textarea class="form-control" id="message" name="message" rows="6"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.card-body -->
+
+                                                                <div class="card-footer">
+                                                                    <button type="submit" class="btn btn-block btn-primary float-right">Send</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                                                        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                {{-- <a href="/send-email/{{ $s->email }}" class="btn btn-secondary"><i class="fas fa-envelope"></i></a> --}}
+                                                
+                                                <!-- EMAIL Button trigger modal -->
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#emailModal">
+                                                    EMAIL
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Compose Email Message</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- form start -->
+                                                            <form action="/send-email/{{$s->email}}" method="POST">
+                                                                @csrf
+                                                                @if ($errors->any())
+                                                                    <div class="alert alert-danger text-[#ff0000]">
+                                                                        <ul>
+                                                                            @foreach ($errors->all() as $error)
+                                                                                <li>{{ $error }}</li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </div>
+                                                                @endif
+                                                                <div class="card-body">
+                                                                    <div class="row">
+
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="company_email">Email Message<span style="color: #ff0000">*</span></label>
+                                                                                {{-- <input type="email" class="form-control" id="company_email" name="email" value="{{$s->email}}"> --}}
+                                                                                <textarea class="form-control" id="message" name="message" rows="6"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.card-body -->
+
+                                                                <div class="card-footer">
+                                                                    <button type="submit" class="btn btn-block btn-primary float-right">Send</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                                                            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
                                                 <div class="btn-group">
                                                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier_{{$s->id}}_modal"><i class="far fa-edit"></i></a>
-                                                    <div class="modal fade" id="edit_supplier_{{$s->id}}_modal">
+                                                    <div class="modal fade" id="edit_supplier_{{$s->id}}_modal" tabindex="-1">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -202,8 +322,6 @@
                                                     <!-- /.modal -->
                                                     <!-- <a class="btn btn-danger" onclick="delete_category_fxn()">Delete</a> -->
                                                     <a href="/delete-staff/{{$s->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                                    <a href="/send-sms/{{ $s->phone }}" class="btn btn-warning"><i class="fas fa-envelope"></i></a>
-                                                    <a href="/send-email/{{ $s->email }}" class="btn btn-secondary"><i class="fas fa-envelope"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
