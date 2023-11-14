@@ -2,7 +2,7 @@
 
 Your are tasked with building a simple CRM system. The CRM should allow admins to manage users and send emails and SMS messages to users. The CRM should also have a dashboard where admins can view user details and perform other actions.
 
-Note: This is a high-level outline, and a complete implementation would require multiple PHP files, a database, and possibly other technologies. 
+Note: This is a high-level outline, and a complete implementation would require multiple PHP files, a database, and possibly other technologies.
 
 ## 1. Database Setup:
 
