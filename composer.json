@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "africastalking/africastalking": "^3.0",
         "akaunting/laravel-money": "^3.1",
         "arcanedev/log-viewer": "^9.0",
         "arielmejiadev/larapex-charts": "^5.2",
@@ -13,6 +14,7 @@
         "jeroennoten/laravel-adminlte": "^3.8",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.11",
         "simplesoftwareio/simple-qrcode": "^4.2",
@@ -57,7 +59,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

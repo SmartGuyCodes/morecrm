@@ -11,6 +11,7 @@ use App\Models\Staff;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use AfricasTalking\SDK\AfricasTalking;
 
 class StaffController extends Controller
 {
@@ -118,9 +119,10 @@ class StaffController extends Controller
         //dd($category_id);
         $msg = "Hello there ";
         // $sms_sender = $this->send_sms($phone, $msg);
-        $sms_sender = $this->send_sms_demo($phone, $msg);
+        // $sms_sender = $this->send_sms_demo($phone, $msg);
+        $sms_sender = $this->more_sms_sender($phone, $msg);
         // dd($sms_sender);
-        if(!$sms_sender){
+        if($sms_sender != 'success'){
             return  redirect()->back()->with('error', 'Staff sms sender failed');// redirect('/login')->with('success', 'Your password has been changed!');
         }
 
@@ -151,7 +153,26 @@ class StaffController extends Controller
 
         return  redirect()->back()->with('success', 'Staff record deleted');
     }
+    private function more_sms_sender($phone, $msg)
+    {
+        $username = 'Cityplus';
+        $api_key = 'a677a441288794b2d02ca9b9ce03fc996a226b653d3f80b8e3857e29dd3fc171';
+        $at = new AfricasTalking($username, $api_key);
 
+        $sms = $at->sms();
+
+        $result = $sms->send([
+            // 'to' => $phone,
+            // 'message' => $msg,
+            'to' => $phone,
+            'from' => 'CITYPLUS',
+            'message' => $msg,
+            'username' => 'Cityplus'
+        ]);
+
+        // dd($result);
+        return $result['status'];
+    }
     private function send_sms($phone, $message)
     {
         $headers = array(
@@ -200,7 +221,7 @@ class StaffController extends Controller
     }
     private function send_sms_demo($phone, $message)
     {
-        $headers = array(  
+        $headers = array(
             'Accept: application/json',
             'Content-Type: application/x-www-form-urlencoded' ,
             'apiKey: a677a441288794b2d02ca9b9ce03fc996a226b653d3f80b8e3857e29dd3fc171' 
