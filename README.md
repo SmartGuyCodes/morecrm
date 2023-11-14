@@ -1,4 +1,4 @@
-# Development
+# MoreCRM
 
 ![MoreCRM Status](https://github.com/SmartGuyCodes/morecrm/actions/workflows/morecrm.yaml/badge.svg)
 
