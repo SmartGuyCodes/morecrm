@@ -196,13 +196,13 @@
                                                     </div>
                                                 </div>
                                                 {{-- <a href="/send-email/{{ $s->email }}" class="btn btn-secondary"><i class="fas fa-envelope"></i></a> --}}
-                                                
-                                                <!-- EMAIL Button trigger modal -->
-                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#emailModal">
+
+                                                <!-- EMAIL Button trigger modal sms_{{$s->id}}_Modal-->
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#email_{{$s->id}}_Modal">
                                                     EMAIL
                                                 </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="email_{{$s->id}}_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">

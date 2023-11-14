@@ -133,7 +133,7 @@ class StaffController extends Controller
     }
     public function email_staff(Request $request, $email)
     {
-        dd($request);
+        // dd($request);
         //dd($category_id);
         // $msg = "Hello there ";
         $request->validate([
@@ -142,7 +142,7 @@ class StaffController extends Controller
 
         // $code = $created_client_records['otp_code'];
         // $mailer = (new EmailController())->verificationEmail($request->company_email, $created_client_records);
-        if(Mail::to($email)->send(new StaffEmail()))
+        if(Mail::to($email)->send(new StaffEmail($request->message)))
         {
             return  redirect()->back()->with('error', 'Staff emailed');
             //return true;//'Email sent successfully!';

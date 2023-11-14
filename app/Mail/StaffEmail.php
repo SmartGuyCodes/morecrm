@@ -13,14 +13,16 @@ class StaffEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $msg;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($msg)
     {
-        //
+        $this->msg = $msg;
     }
 
     /**
@@ -44,6 +46,9 @@ class StaffEmail extends Mailable
     {
         return new Content(
             view: 'emails.staff',
+            // with: [
+            //     'message' => $this->msg,
+            // ]
         );
     }
 
